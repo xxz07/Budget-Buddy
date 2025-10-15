@@ -14,17 +14,18 @@ class Transactions
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column]
-    private ?int $user_id = null;
+    #[ORM\ManyToOne(inversedBy: 'transactions')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user_id = null;
 
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
-    private ?string $money = null;
+    private ?string $amount = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $type = null;
+    #[ORM\Column]
+    private ?int $type = null;
 
     #[ORM\Column(length: 255)]
     private ?string $description = null;
@@ -37,12 +38,12 @@ class Transactions
         return $this->id;
     }
 
-    public function getUserId(): ?int
+    public function getUserId(): ?User
     {
         return $this->user_id;
     }
 
-    public function setUserId(int $user_id): static
+    public function setUserId(?User $user_id): static
     {
         $this->user_id = $user_id;
 
@@ -61,24 +62,24 @@ class Transactions
         return $this;
     }
 
-    public function getMoney(): ?string
+    public function getAmount(): ?string
     {
-        return $this->money;
+        return $this->amount;
     }
 
-    public function setMoney(string $money): static
+    public function setAmount(string $amount): static
     {
-        $this->money = $money;
+        $this->amount = $amount;
 
         return $this;
     }
 
-    public function getType(): ?string
+    public function getType(): ?int
     {
         return $this->type;
     }
 
-    public function setType(string $type): static
+    public function setType(int $type): static
     {
         $this->type = $type;
 

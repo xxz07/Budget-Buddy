@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Oct 07, 2025 at 09:23 AM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Host: localhost
+-- Generation Time: Oct 15, 2025 at 11:50 AM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -38,7 +38,7 @@ CREATE TABLE `doctrine_migration_versions` (
 --
 
 INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_time`) VALUES
-('DoctrineMigrations\\Version20251007072234', '2025-10-07 09:22:40', 284);
+('DoctrineMigrations\\Version20251015094623', '2025-10-15 09:46:56', 142);
 
 -- --------------------------------------------------------
 
@@ -64,10 +64,10 @@ CREATE TABLE `messenger_messages` (
 
 CREATE TABLE `transactions` (
   `id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
+  `user_id_id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `money` decimal(10,2) NOT NULL,
-  `type` varchar(255) NOT NULL,
+  `amount` decimal(10,2) NOT NULL,
+  `type` int(11) NOT NULL,
   `description` varchar(255) NOT NULL,
   `date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -109,7 +109,8 @@ ALTER TABLE `messenger_messages`
 -- Indexes for table `transactions`
 --
 ALTER TABLE `transactions`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `IDX_EAA81A4C9D86650F` (`user_id_id`);
 
 --
 -- Indexes for table `user`
@@ -139,6 +140,16 @@ ALTER TABLE `transactions`
 --
 ALTER TABLE `user`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `transactions`
+--
+ALTER TABLE `transactions`
+  ADD CONSTRAINT `FK_EAA81A4C9D86650F` FOREIGN KEY (`user_id_id`) REFERENCES `user` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

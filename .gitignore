@@ -59,3 +59,5 @@
 .env.local
 .env.*
 
+# macos
+.DS_Store

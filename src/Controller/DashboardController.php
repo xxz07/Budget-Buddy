@@ -38,27 +38,25 @@ final class DashboardController extends AbstractController
         $incomeChartData = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
         $transactionsChartData = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
-
-        // UNCOMMENT THIS LATER OUT WHEN WORKING ON PROJECT
         // get transactions and put them in data
-        // $month = 1;
-        // $amount = 0;
-        // $currentYear = date("Y");
-        // foreach ($transactions as $value) {
-        //     $monthValue = date('m', strtotime($value["date"]));
-        //     $yearValue = date('Y', strtotime($value["date"]));
+        $month = 1;
+        $amount = 0;
+        $currentYear = date("Y");
+        foreach ($transactions as $value) {
+            $monthValue = date('m', strtotime($value["date"]));
+            $yearValue = date('Y', strtotime($value["date"]));
 
-        //     if ($yearValue == $currentYear) {
-        //         if ($month != $monthValue) {
-        //             $incomeChartData[$month + 0] += $amount;
-        //             $amount = 0;
-        //             $month = $monthValue;
-        //         }
-        //         $amount += $value["amount"];
-        //     }
+            if ($yearValue == $currentYear) {
+                if ($month != $monthValue) {
+                    $incomeChartData[$month + 0] += $amount;
+                    $amount = 0;
+                    $month = $monthValue;
+                }
+                $amount += $value["amount"];
+            }
             
             
-        // }
+        }
 
 
         $chart = $chartBuilder->createChart(Chart::TYPE_LINE);

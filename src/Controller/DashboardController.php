@@ -38,24 +38,26 @@ final class DashboardController extends AbstractController
         $incomeChartData = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
         $transactionsChartData = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
-        // get transactions and put them in data
-        $month = 1;
-        $amount = 0;
+        // get transactions data and put them in a chart
         $currentYear = date("Y");
         foreach ($transactions as $value) {
-            $monthValue = date('m', strtotime($value["date"]));
-            $yearValue = date('Y', strtotime($value["date"]));
+            $monthValue = (int)date('m', strtotime($value["date"]));
+            $yearValue = (int)date('Y', strtotime($value["date"]));
 
             if ($yearValue == $currentYear) {
-                if ($month != $monthValue) {
-                    $incomeChartData[$month + 0] += $amount;
-                    $amount = 0;
-                    $month = $monthValue;
-                }
-                $amount += $value["amount"];
+                $transactionsChartData[$monthValue - 1] += $value["amount"];
             }
-            
-            
+        }
+
+        // get income data and put them in a chart
+        $currentYear = date("Y");
+        foreach ($income as $value) {
+            $monthValue = (int)date('m', strtotime($value["date"]));
+            $yearValue = (int)date('Y', strtotime($value["date"]));
+
+            if ($yearValue == $currentYear) {
+                $incomeChartData[$monthValue - 1] += $value["amount"];
+            }
         }
 
 
@@ -74,7 +76,7 @@ final class DashboardController extends AbstractController
                     'label' => 'Transactions',
                     'backgroundColor' => 'rgba(34, 239, 75, 1)',
                     'borderColor' => 'rgba(34, 239, 75, 1)',
-                    'data' => [0, 0, 0, 0, 0, 0, 0],
+                    'data' => $transactionsChartData,
                 ],
             ],
         ]);

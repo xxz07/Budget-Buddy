@@ -94,7 +94,31 @@ final class DashboardController extends AbstractController
         
         return $this->render("dashboard/index.html.twig", [
             "user" => $userId,
-            'chart' => $chart,
+            "chart" => $chart,
+            // "transactions" => $transactions,
+            // "income" => $income
+        ]);
+    }
+
+
+    //TODO: add full settings here, this is a burner
+    #[Route("/settings", name: "app_settings")]
+    public function settings(ChartBuilderInterface $chartBuilder, UserRepository $UserRepository, EntityManagerInterface $entityManager): Response
+    {
+        $user = $this->security->getUser();
+        
+        
+
+        // if the user is not signed in then return the user to the regrister page.
+        if ($user === null) {
+            return $this->redirectToRoute("app_register");
+        }
+
+        $userId = $user->getId();
+        
+        return $this->render("dashboard/settings.html.twig", [
+            "user" => $userId,
+
         ]);
     }
 }

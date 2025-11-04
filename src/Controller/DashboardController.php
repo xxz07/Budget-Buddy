@@ -91,14 +91,15 @@ final class DashboardController extends AbstractController
                 ],
             ],
         ]);
-
-//        Create form
+        
+        // Create form
         $transactionsForm = new Transactions();
         $form=$this -> createForm(UserTransactionsType::class, $transactionsForm);
 
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()) {
             $transactionsForm = $form->getData();
+            $transactionsForm->setUser($user);
             $entityManager->persist($transactionsForm);
             $entityManager->flush();
         }

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Transactions;
+use App\Form\UserTransactionsType;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -90,11 +91,14 @@ final class DashboardController extends AbstractController
             ],
         ]);
 
-
+//        Create form
+        $transactionsForm = new Transactions();
+        $form=$this -> createForm(UserTransactionsType::class, $transactionsForm);
         
         return $this->render("dashboard/index.html.twig", [
             "user" => $userId,
-            "chart" => $chart,
+            'chart' => $chart,
+            'form' => $form,
             // "transactions" => $transactions,
             // "income" => $income
         ]);

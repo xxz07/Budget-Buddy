@@ -42,14 +42,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var Collection<int, Transactions>
      */
-    #[ORM\OneToMany(mappedBy: 'user_id', targetEntity: Transactions::class)]
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Transactions::class)]
     private Collection $transactions;
 
     public function __construct()
     {
         $this->transactions = new ArrayCollection();
     }
-
 
 
     public function getId(): ?int
@@ -146,7 +145,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if (!$this->transactions->contains($transaction)) {
             $this->transactions->add($transaction);
-            $transaction->setUserId($this);
+            $transaction->setUser($this);
         }
 
         return $this;
@@ -156,8 +155,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if ($this->transactions->removeElement($transaction)) {
             // set the owning side to null (unless already changed)
-            if ($transaction->getUserId() === $this) {
-                $transaction->setUserId(null);
+            if ($transaction->getUser() === $this) {
+                $transaction->setUser(null);
             }
         }
 

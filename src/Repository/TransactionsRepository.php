@@ -16,54 +16,28 @@ class TransactionsRepository extends ServiceEntityRepository
         parent::__construct($registry, Transactions::class);
     }
 
-    //    /**
-    //     * @return Transactions[] Returns an array of Transactions objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('t')
-    //            ->andWhere('t.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('t.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
+//    /**
+//     * @return Transactions[] Returns an array of Transactions objects
+//     */
+//    public function findByExampleField($value): array
+//    {
+//        return $this->createQueryBuilder('t')
+//            ->andWhere('t.exampleField = :val')
+//            ->setParameter('val', $value)
+//            ->orderBy('t.id', 'ASC')
+//            ->setMaxResults(10)
+//            ->getQuery()
+//            ->getResult()
+//        ;
+//    }
 
-    //    public function findOneBySomeField($value): ?Transactions
-    //    {
-    //        return $this->createQueryBuilder('t')
-    //            ->andWhere('t.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
-
-    public function findAllTransactionsByUserId(int $id): array
-    {
-        $conn = $this->getEntityManager()->getConnection();
-
-        // type is 1 because its transactions
-        $sql = 'SELECT * FROM `transactions` WHERE `user_id` = :id AND `type` = 1 ORDER BY date ASC;';
-
-        $resultSet = $conn->executeQuery($sql, ['id' => $id]);
-
-        // returns an array of arrays (i.e. a raw data set)
-        return $resultSet->fetchAllAssociative();
-    }
-
-    public function findAllIncomeByUserId(int $id): array
-    {
-        $conn = $this->getEntityManager()->getConnection();
-
-        // type is 0 because its Income
-        $sql = 'SELECT * FROM `transactions` WHERE `user_id` = :id AND `type` = 0 ORDER BY date ASC;';
-
-        $resultSet = $conn->executeQuery($sql, ['id' => $id]);
-
-        // returns an array of arrays (i.e. a raw data set)
-        return $resultSet->fetchAllAssociative();
-    }
+//    public function findOneBySomeField($value): ?Transactions
+//    {
+//        return $this->createQueryBuilder('t')
+//            ->andWhere('t.exampleField = :val')
+//            ->setParameter('val', $value)
+//            ->getQuery()
+//            ->getOneOrNullResult()
+//        ;
+//    }
 }

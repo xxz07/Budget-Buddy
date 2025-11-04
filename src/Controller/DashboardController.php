@@ -26,7 +26,7 @@ final class DashboardController extends AbstractController
         
         
 
-        // if the user is not signed in then return the user to the regrister page.
+        // if the user is not signed in then return the user to the register page.
         if ($user === null) {
             return $this->redirectToRoute("app_register");
         }

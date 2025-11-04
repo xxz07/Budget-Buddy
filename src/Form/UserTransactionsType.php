@@ -3,7 +3,7 @@
 namespace App\Form;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -18,7 +18,7 @@ class UserTransactionsType extends AbstractType
             ->add('amount')
             ->add('type')
             ->add('description', TextAreaType::class)
-            ->add('date', DateType::class)
+            ->add('date', DateTimeType::class)
             ->add('add', SubmitType::class)
         ;
     }

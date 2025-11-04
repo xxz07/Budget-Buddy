@@ -40,4 +40,30 @@ class TransactionsRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+    public function findAllTransactionsByUserId(int $id): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        // type is 1 because its transactions
+        $sql = 'SELECT * FROM `transactions` WHERE `user_id` = :id AND `type` = 1 ORDER BY date ASC;';
+
+        $resultSet = $conn->executeQuery($sql, ['id' => $id]);
+
+        // returns an array of arrays (i.e. a raw data set)
+        return $resultSet->fetchAllAssociative();
+    }
+
+    public function findAllIncomeByUserId(int $id): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        // type is 0 because its Income
+        $sql = 'SELECT * FROM `transactions` WHERE `user_id` = :id AND `type` = 0 ORDER BY date ASC;';
+
+        $resultSet = $conn->executeQuery($sql, ['id' => $id]);
+
+        // returns an array of arrays (i.e. a raw data set)
+        return $resultSet->fetchAllAssociative();
+    }
 }

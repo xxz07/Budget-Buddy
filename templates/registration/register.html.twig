@@ -1,19 +1,62 @@
-{% extends 'base.html.twig' %}
+{#{% extends 'base.html.twig' %}#}
 
-{% block title %}Register{% endblock %}
+{#{% block title %}Register{% endblock %}#}
 
-{% block body %}
-    <h1>Register</h1>
+{#{% block body %}#}
+{#    <h1>Register</h1>#}
 
-    {{ form_errors(registrationForm) }}
+{#    {{ form_errors(registrationForm) }}#}
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+{#    {{ form_start(registrationForm) }}#}
+{#        {{ form_row(registrationForm.email) }}#}
+{#        {{ form_row(registrationForm.plainPassword, {#}
+{#            label: 'Password'#}
+{#        }) }}#}
+{#        {{ form_row(registrationForm.agreeTerms) }}#}
 
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
-{% endblock %}
+{#        <button type="submit" class="btn">Register</button>#}
+{#    {{ form_end(registrationForm) }}#}
+{#{% endblock %}#}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Register</title>
+    <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+            crossorigin="anonymous"
+    />
+</head>
+<body style="background-color: #dadada">
+<main>
+    <div class="container bg-light rounded mt-5">
+        <div class="row p-3">
+            <div class="col">
+                <h1>Register</h1>
+
+                {{ form_errors(registrationForm) }}
+
+                {{ form_start(registrationForm) }}
+                {{ form_row(registrationForm.email) }}
+                {{ form_row(registrationForm.plainPassword, {
+                    label: 'Password'
+                }) }}
+                {{ form_row(registrationForm.agreeTerms) }}
+
+                <button type="submit" class="btn">Register</button>
+                {{ form_end(registrationForm) }}
+            </div>
+        </div>
+
+    </div>
+</main>
+<script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"
+></script>
+</body>
+</html>

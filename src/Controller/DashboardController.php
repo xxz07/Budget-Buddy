@@ -8,6 +8,7 @@ use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\Id;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\UX\Chartjs\Model\Chart;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,7 +21,7 @@ final class DashboardController extends AbstractController
     public function __construct(private Security $security) {}
 
     #[Route("/dashboard", name: "app_dashboard")]
-    public function index(ChartBuilderInterface $chartBuilder, UserRepository $UserRepository, EntityManagerInterface $entityManager): Response
+    public function index(Request $request, ChartBuilderInterface $chartBuilder, UserRepository $UserRepository, EntityManagerInterface $entityManager): Response
     {
         $user = $this->security->getUser();
         
@@ -94,6 +95,13 @@ final class DashboardController extends AbstractController
 //        Create form
         $transactionsForm = new Transactions();
         $form=$this -> createForm(UserTransactionsType::class, $transactionsForm);
+
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()) {
+            $transactionsForm = $form->getData();
+            $entityManager->persist($transactionsForm);
+            $entityManager->flush();
+        }
         
         return $this->render("dashboard/index.html.twig", [
             "user" => $userId,

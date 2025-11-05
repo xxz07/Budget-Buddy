@@ -72,7 +72,7 @@ class TransactionsRepository extends ServiceEntityRepository
         $conn = $this->getEntityManager()->getConnection();
 
         // type is 0 because its Income
-        $sql = 'SELECT * FROM `transactions` WHERE `user_id` = :id ORDER BY date DESC;';
+        $sql = 'SELECT * FROM `transactions` WHERE `user_id` = :id ORDER BY date DESC LIMIT 6;';
 
         $resultSet = $conn->executeQuery($sql, ['id' => $id]);
 

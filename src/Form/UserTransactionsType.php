@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -16,7 +17,13 @@ class UserTransactionsType extends AbstractType
         $builder
             ->add('name')
             ->add('amount')
-            ->add('type')
+            ->add('type', ChoiceType::class, [
+                'choices'  => [
+                    '' => null,
+                    'Income' => 0,
+                    'Expense' => 1,
+                ],
+            ])
             ->add('description', TextAreaType::class)
             ->add('date', DateType::class)
             ->add('add', SubmitType::class)

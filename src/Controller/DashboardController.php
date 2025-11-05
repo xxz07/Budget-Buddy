@@ -77,7 +77,7 @@ final class DashboardController extends AbstractController
                     'data' => $incomeChartData,
                 ],
                 [
-                    'label' => 'Transactions',
+                    'label' => 'Expense',
                     'backgroundColor' => 'rgba(206, 38, 75, 1)',
                     'borderColor' => 'rgba(206, 38, 75, 1)',
                     'data' => $transactionsChartData,

@@ -138,4 +138,26 @@ final class DashboardController extends AbstractController
 
         ]);
     }
+
+    #[Route("/dashboard/view-{id}", name: "app_settings")]
+    public function transactionView(int $id, ChartBuilderInterface $chartBuilder, UserRepository $UserRepository, EntityManagerInterface $entityManager): Response
+    {
+        $user = $this->security->getUser();
+
+
+
+        // if the user is not signed in then return the user to the regrister page.
+        if ($user === null) {
+            return $this->redirectToRoute("app_view_dashboard");
+        }
+
+        $userId = $user->getId();
+        $queryReturn = $entityManager->getRepository(Transactions::class)->findActivityById($id, $userId);
+
+        return $this->render("dashboard/dashboardView.html.twig", [
+            "user" => $userId,
+            'activity' => $queryReturn
+
+        ]);
+    }
 }

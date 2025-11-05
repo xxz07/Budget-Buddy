@@ -79,4 +79,17 @@ class TransactionsRepository extends ServiceEntityRepository
         // returns an array of arrays (i.e. a raw data set)
         return $resultSet->fetchAllAssociative();
     }
+
+    public function findActivityById(int $id, int $userId): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        // type is 0 because its Income
+        $sql = 'SELECT * FROM `transactions` WHERE `id` = :id AND `user_id` = :user_id LIMIT 1;';
+
+        $resultSet = $conn->executeQuery($sql, ['id' => $id, 'user_id' => $userId]);
+
+        // returns an array of arrays (i.e. a raw data set)
+        return $resultSet->fetchAssociative();
+    }
 }

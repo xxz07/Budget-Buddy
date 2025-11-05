@@ -63,6 +63,7 @@ final class DashboardController extends AbstractController
         }
 
 
+        // generate the form
         $chart = $chartBuilder->createChart(Chart::TYPE_LINE);
 
         $chart->setData([

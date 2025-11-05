@@ -35,6 +35,7 @@ final class DashboardController extends AbstractController
         $userId = $user->getId();
         $transactions = $entityManager->getRepository(Transactions::class)->findAllTransactionsByUserId($userId);
         $income = $entityManager->getRepository(Transactions::class)->findAllIncomeByUserId($userId);
+        $activity = $entityManager->getRepository(Transactions::class)->findLatestActivity($userId);
 
         // pre define chart data
         $incomeChartData = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
@@ -71,14 +72,14 @@ final class DashboardController extends AbstractController
             'datasets' => [
                 [
                     'label' => 'Income',
-                    'backgroundColor' => 'rgba(206, 38, 75, 1)',
-                    'borderColor' => 'rgba(206, 38, 75, 1)',
+                    'backgroundColor' => 'rgba(34, 239, 75, 1)',
+                    'borderColor' => 'rgba(34, 239, 75, 1)',
                     'data' => $incomeChartData,
                 ],
                 [
                     'label' => 'Transactions',
-                    'backgroundColor' => 'rgba(34, 239, 75, 1)',
-                    'borderColor' => 'rgba(34, 239, 75, 1)',
+                    'backgroundColor' => 'rgba(206, 38, 75, 1)',
+                    'borderColor' => 'rgba(206, 38, 75, 1)',
                     'data' => $transactionsChartData,
                 ],
             ],
@@ -106,9 +107,10 @@ final class DashboardController extends AbstractController
         }
         
         return $this->render("dashboard/index.html.twig", [
-            "user" => $userId,
+            'user' => $userId,
             'chart' => $chart,
             'form' => $form,
+            'activities' => $activity
             // "transactions" => $transactions,
             // "income" => $income
         ]);

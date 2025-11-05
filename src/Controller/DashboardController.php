@@ -104,6 +104,7 @@ final class DashboardController extends AbstractController
             $transactionsForm->setUser($user);
             $entityManager->persist($transactionsForm);
             $entityManager->flush();
+            return $this->redirect($request->getUri());
         }
         
         return $this->render("dashboard/index.html.twig", [

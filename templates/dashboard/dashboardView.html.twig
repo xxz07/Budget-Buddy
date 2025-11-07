@@ -26,7 +26,13 @@
                             <a class="nav-link" href="/about-us">About us & contact</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/dashboard">Go to dashboard</a>
+                            <a class="nav-link" href="/settings">Settings</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/dashboard">Dashboard</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/logout">Log out</a>
                         </li>
                     </ul>
                 </div>
@@ -47,6 +53,7 @@
                     <th scope="col">Amount</th>
                     <th scope="col">Description</th>
                     <th scope="col">Date</th>
+                    <th scope="col">DELETE</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -73,6 +80,9 @@
                     </td>
                     <td>
                         {{ activity.date }}
+                    </td>
+                    <td>
+                        <a href="/dashboard/delete-{{ activity.id }}">remove</a>
                     </td>
                 </tr>
                 </tbody>

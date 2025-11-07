@@ -4,8 +4,51 @@
 
 {% block body %}
 
+<header style="background-color: white">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">French budget</a>
+            <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarNav"
+                    aria-controls="navbarNav"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation"
+            >
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div
+                    class="collapse navbar-collapse justify-content-end"
+                    id="navbarNav"
+            >
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/about-us">About us & contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/settings">Settings</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/dashboard">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout">Log out</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-    <p>Email: {{ app.user.email }}</p>
+    <div class="p-5 w-50 m-auto mt-5">
+        <h3>Email: {{ app.user.email }}</h3>
+
+        <a class="btn btn-primary" href="/logout">Log out</a>
+        <p>To request your data to be removed, please <a href="/about-us">email us</a>.</p>
+    </div>
     
 
 

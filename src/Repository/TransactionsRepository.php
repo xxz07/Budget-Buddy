@@ -84,12 +84,22 @@ class TransactionsRepository extends ServiceEntityRepository
     {
         $conn = $this->getEntityManager()->getConnection();
 
-        // type is 0 because its Income
         $sql = 'SELECT * FROM `transactions` WHERE `id` = :id AND `user_id` = :user_id LIMIT 1;';
 
         $resultSet = $conn->executeQuery($sql, ['id' => $id, 'user_id' => $userId]);
 
         // returns an array of arrays (i.e. a raw data set)
         return $resultSet->fetchAssociative();
+    }
+
+    public function deleteActivityById(int $id, int $userId)
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = 'DELETE FROM `transactions` WHERE `id` = :id AND `user_id` = :user_id LIMIT 1;';
+
+        $resultSet = $conn->executeQuery($sql, ['id' => $id, 'user_id' => $userId]);
+
+        return 1;
     }
 }

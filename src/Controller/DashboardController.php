@@ -139,7 +139,7 @@ final class DashboardController extends AbstractController
         ]);
     }
 
-    #[Route("/dashboard/view-{id}", name: "app_settings")]
+    #[Route("/dashboard/view-{id}", name: "app_view")]
     public function transactionView(int $id, ChartBuilderInterface $chartBuilder, UserRepository $UserRepository, EntityManagerInterface $entityManager): Response
     {
         $user = $this->security->getUser();
@@ -159,5 +159,23 @@ final class DashboardController extends AbstractController
             'activity' => $queryReturn
 
         ]);
+    }
+
+    #[Route("/dashboard/delete-{id}", name: "app_delete")]
+    public function transactionDelete(int $id, ChartBuilderInterface $chartBuilder, UserRepository $UserRepository, EntityManagerInterface $entityManager): Response
+    {
+        $user = $this->security->getUser();
+
+
+
+        // if the user is not signed in then return the user to the regrister page.
+        if ($user === null) {
+            return $this->redirectToRoute("app_view_dashboard");
+        }
+
+        $userId = $user->getId();
+        $entityManager->getRepository(Transactions::class)->deleteActivityById($id, $userId);
+
+        return $this->redirectToRoute("app_dashboard");
     }
 }

@@ -1,8 +1,6 @@
-# Lege Symfony repository - Pas deze Readme aan!
+# french budget
 
-Deze repo is leeg zodat je zelf snel met een repository kan werken. 
-
-Zorg ervoor dat je deze Readme aanpast.
+Deze repository is de source code voor french budget; de budget app voor studenten
 
 ## Benodigdheden - Wat heb je geinstalleerd
 * Composer
@@ -24,4 +22,3 @@ Type het commando ``composer install``
 
 Type het commando ``symfony serve``
 
-### Happy Hunting!

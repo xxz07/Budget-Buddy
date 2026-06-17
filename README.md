@@ -1,4 +1,8 @@
-# french budget
+> [!NOTE]  
+> This is a mirror of an old school project and may not reflect the skills on anyone who worked on this
+
+
+# French budget
 
 Deze repository is de source code voor french budget; de budget app voor studenten
 
